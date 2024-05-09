@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <span>Favorites</span>
+  </mat-toolbar>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let product of favoriteProducts">
+      <h4 mat-line>{{ product.name }}</h4>
+      <p mat-line>Price: \${{ product.price }}</p>
+    </mat-list-item>
+  </mat-list>
+  

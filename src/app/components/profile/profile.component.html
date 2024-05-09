@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <span>Profile</span>
+  </mat-toolbar>
+  
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ profile.username }}</mat-card-title>
+      <mat-card-subtitle>{{ profile.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Birthdate: {{ profile.birthdate }}</p>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let product of profile.products">
+      <h4 mat-line>{{ product.name }}</h4>
+      <p mat-line>Price: \${{ product.price }}</p>
+    </mat-list-item>
+  </mat-list>
+  
