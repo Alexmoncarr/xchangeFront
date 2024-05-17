@@ -14,32 +14,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './components/home/home.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { ChatsComponent } from './components/chats/chats.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { EventsComponent } from './components/events/events.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
-
+import { LoginComponent } from './components/login/login.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    FavoritesComponent,
-    ChatsComponent,
-    ProfileComponent,
-    EventsComponent,
-    AdminDashboardComponent,
-    NavigationComponent,
-    FooterComponent,
     LoginComponent,
-    RegisterComponent
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +41,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+   
   ],
   bootstrap: [AppComponent]
 })

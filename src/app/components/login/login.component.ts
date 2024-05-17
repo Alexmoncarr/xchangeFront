@@ -1,26 +1,28 @@
+// login.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-    username = '';
-    password = '';
+  username: string = ''; // Inicialización directa con un string vacío
+  password: string = ''; // Inicialización directa con un string vacío
+  error: string | null = null; // Permitir que error sea string o null, inicializado como null
 
-    constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
-    login(): void {
-        this.authService.login(this.username, this.password).subscribe({
-            next: () => this.router.navigate(['/']),
-            error: (err: any) => console.error(err)
-        });
-    }
-
-    goToRegister(): void {
-        this.router.navigate(['/register']);
-    }
+  handleLogin(): void {
+    this.authService.login(this.username, this.password).subscribe({
+      next: () => {
+        // handle successful login, perhaps redirect to dashboard or home
+      },
+      error: error => {
+        this.error = 'Failed to login';
+        console.error(error);
+      }
+    });
+  }
 }
