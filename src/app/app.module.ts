@@ -17,11 +17,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ChatsComponent } from './components/chats/chats.component';
+import { EventsComponent } from './components/events/events.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProductListComponent
+    ProductListComponent,
+    AdminDashboardComponent,
+    ChatsComponent,
+    EventsComponent,
+    FavouritesComponent,
+    HomeComponent,
+    NavigationComponent,
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,39 +1,40 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
+    private apiUrl = 'http://localhost:8080';
+    private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
-    this.currentUserSubject = new BehaviorSubject<any>(storedUser ? JSON.parse(storedUser) : null);
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
+    constructor(private http: HttpClient) {}
 
-  public get currentUserValue(): any {
-    return this.currentUserSubject.value;
-  }
+    login(username: string, password: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
+            tap(response => {
+                localStorage.setItem('jwt', response.jwt); // assuming response contains JWT as 'jwt'
+                this.isAuthenticated.next(true);
+            })
+        );
+    }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`/api/login`, { username, password })
-      .pipe(map(user => {
-        if (user) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-        return user;
-      }));
-  }
+    register(userData: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/api/users`, userData);
+    }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-  }
+    isLoggedIn(): boolean {
+        return this.isAuthenticated.value;
+    }
+
+    logout(): void {
+        localStorage.removeItem('jwt');
+        this.isAuthenticated.next(false);
+    }
+
+    private hasToken(): boolean {
+        return !!localStorage.getItem('jwt');
+    }
 }
